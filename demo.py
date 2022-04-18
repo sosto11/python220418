@@ -31,3 +31,7 @@ print(type(device))
 print(len(device))
 #print(device{0}) #딕셔너리는 순서가 없다. 에러남
 print(device["아이폰"])
+
+
+for item in device.items():
+    print(item)
