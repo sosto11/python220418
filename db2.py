@@ -1,25 +1,8 @@
-# db1.py
-
+# db1.py 
 import sqlite3
-
-#연결객체를 만들기(먼저 메모리에서 연습)
-con = sqlite3.connect(":memory:")
-#구문을 수행할 커서 객체 
-cur = con.cursor() 
-#테이블 구조(테이블 스키마)
-cur.execute("create table PhoneBook (Name text, PhoneNum text);")
-#1건을 입력
-cur.execute("insert into PhoneBook values ('derick','010');")
-#검색
-cur.execute("select * from PhoneBook;")
-#for row in cur:
-#    print(row)
-
-
-import sqlite3
-
-#연결객체를 만들기(먼저 메모리에서 연습)
-con = sqlite3.connect(":memory:")
+#연결객체를 만들기
+#파일에 데이터베이스를 저장
+con = sqlite3.connect("c:\\work\\commit.db")
 #구문을 수행할 커서 객체 
 cur = con.cursor() 
 #테이블 구조(테이블 스키마):SQL구문은 대소문자 구분안함. 
@@ -30,10 +13,11 @@ cur.execute("insert into PhoneBook values ('derick','010');")
 name = "gildong"
 phoneNumber = "010-222"
 cur.execute("insert into PhoneBook values (?, ?);", (name, phoneNumber))
-#N건을 입력
+#N건을 입력(2차원 2행2열)
 datalist = (("tom","010-123"),("dsp","010-333"))
 cur.executemany("insert into PhoneBook values (?, ?);", datalist)
 #검색
 cur.execute("select * from PhoneBook;")
-for row in cur:
-    print(row)
+print(cur.fetchall())
+#작업을 완료하고 종료
+con.commit()
